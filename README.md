@@ -18,13 +18,13 @@ container orchestration, remote access, monitoring, and backups.
 ```
                         ┌─────────────────────────────┐
                         │      Proxmox VE (Host)      │
-                        │ Intel Processor · 32GB RAM  │
+                        │ Intel Processor · 16GB RAM  │
                         └──────────────┬──────────────┘
                                        │
                  ┌─────────────────────┴─────────────────────┐
                  │                                           │
         ┌────────▼──────────┐                         ┌────────▼──────────┐
-        │      nas-01       │                         │     docker-01     │
+        │    nas-server     │                         │   docker-server   │
         │   Ubuntu Server   │◄────── NFS / Samba ────►│   Ubuntu Server   │
         │    Storage VM     │                         │   Application VM  │
         └───────────────────┘                         └───────────────────┘
@@ -44,7 +44,7 @@ container orchestration, remote access, monitoring, and backups.
 |----------------------------|--------------------------------|
 |         Proxmox VE         |     EC2 (hypervisor layer)     |
 |      Docker + Compose      |  ECS (container orchestration) |
-|  NFS (nas-01 → docker-01)  |  EFS (shared network storage)  |
+|  NFS (nas → docker-server) |  EFS (shared network storage)  |
 |         Tailscale          |    VPN / private networking    |
 |        Uptime Kuma         | CloudWatch monitoring/alerting |
 | Proxmox scheduled backups  | AWS Backup / snapshot policies |
@@ -56,15 +56,15 @@ container orchestration, remote access, monitoring, and backups.
 **Host:** Proxmox VE (chosen over bare Ubuntu + Docker specifically for VM
 isolation, snapshotting, and hands-on virtualization practice)
 
-**nas-01** — Ubuntu Server, dedicated storage VM
+**nas-server** — Ubuntu Server, dedicated storage VM
 - 1TB HDD mounted at `/mnt/storage`, organized into Backups / Media
   / NextCloud / Public
 - NFS exports for Linux/Docker workloads; Samba shares for Windows/local devices
   and TV clients
-- Kept deliberately separate from `docker-01` so storage stays stable even
+- Kept deliberately separate from `docker-server` so storage stays stable even
   if the application VM is rebuilt
 
-**docker-01** — Ubuntu Server, application VM
+**docker-server** — Ubuntu Server, application VM
 - Docker Engine + Docker Compose, stacks under `/opt/stacks/`
 - **Portainer** — container management UI
 - **Uptime Kuma** — monitors both VMs, Proxmox, Portainer, Samba, and SSH
