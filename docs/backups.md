@@ -7,12 +7,12 @@
 
 ## What's backed up
 
-- Proxmox's built-in scheduled backup job runs **daily at midnight**, backing up both VM disk images — `nas-01` and `docker-01` — to `backup500`.
+- Proxmox's built-in scheduled backup job runs **daily at midnight**, backing up both VM disk images — `nas-server` and `docker-server` — to `backup500`.
 - This captures full VM state (OS, configs, and in nas-01's case, whatever's on its attached storage), not just user files — a full VM restore is possible from any retained backup point, not just a file-level recovery.
 
 ## Philosophy: containers are disposable, data is not
 
-The Docker stacks on `docker-01` (Portainer, Uptime Kuma, Homepage, Jellyfin) are treated as fully rebuildable — `docker compose down && docker compose up -d` should always be safe. This was **verified in practice**, not just assumed: Jellyfin was torn down and rebuilt as a deliberate test, confirming its configuration/library data (which lives in a named volume, not the container itself) survived the cycle intact.
+The Docker stacks on `docker-server` (Portainer, Uptime Kuma, Homepage, Jellyfin) are treated as fully rebuildable — `docker compose down && docker compose up -d` should always be safe. This was **verified in practice**, not just assumed: Jellyfin was torn down and rebuilt as a deliberate test, confirming its configuration/library data (which lives in a named volume, not the container itself) survived the cycle intact.
 
 This separation — ephemeral compute vs. persistent data — is the same principle behind containers/pods in orchestrated environments generally, and specifically mirrors how AWS separates compute (EC2/ECS, disposable) from storage (EBS/EFS/S3, persistent) as distinct concerns.
 
