@@ -54,20 +54,15 @@ isolation, snapshotting, and hands-on virtualization practice)
 
 ## Networking
 
-- LAN: `192.168.100.0/24`
-- Static DHCP reservations for both VMs so services have predictable
-  addresses
-- No public port forwarding — all remote access goes through Tailscale's
-  private mesh network
-- VLAN segmentation (PCs / IoT / server infra) planned as future work
+Flat `192.168.100.0/24` LAN with static DHCP reservations for both VMs. No public port forwarding — all remote access goes through Tailscale's private mesh.
+
+**Full details:** [docs/networking.md](docs/networking.md)
 
 ## Backups
 
-- Proxmox scheduled backups run daily for both VMs, stored on a dedicated
-  separate HDDs
-- Philosophy: containers are disposable, data is not. This has been verified in
-  practice by tearing down and rebuilding services (e.g. Jellyfin) without
-  data loss
+Proxmox scheduled backups run daily for both VMs to a dedicated backup disk. Verified via an actual teardown/rebuild test, not just configured and assumed working.
+
+**Full details:** [docs/backups.md](docs/backups.md)
 
 ## What I practiced building this
 
