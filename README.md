@@ -16,28 +16,6 @@ container orchestration, remote access, monitoring, and backups.
 ## Architecture
 
 ![Architecture diagram](architecture.png)
-```
-                        ┌─────────────────────────────┐
-                        │      Proxmox VE (Host)      │
-                        │ Intel Processor · 16GB RAM  │
-                        └──────────────┬──────────────┘
-                                       │
-                 ┌─────────────────────┴─────────────────────┐
-                 │                                           │
-        ┌────────▼──────────┐                         ┌────────▼──────────┐
-        │    nas-server     │                         │   docker-server   │
-        │   Ubuntu Server   │◄────── NFS / Samba ────►│   Ubuntu Server   │
-        │    Storage VM     │                         │   Application VM  │
-        └───────────────────┘                         └───────────────────┘
-        1TB HDD, ext4                                  Docker Engine + Compose
-        /mnt/storage:                                  Stacks:
-          Backups                                        - Portainer
-          Public                                         - Uptime Kuma
-          Media                                          - Homepage
-          NextCloud                                      - Jellyfin
-          Public                                       Tailscale (remote access)
-```
-
 
 **AWS concept mapping** (why this is relevant beyond the homelab itself):
 
