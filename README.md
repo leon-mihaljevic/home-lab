@@ -49,9 +49,9 @@ isolation, snapshotting, and hands-on virtualization practice)
 - Docker Engine + Docker Compose, stacks under `/opt/stacks/`
 - **Portainer** — container management UI
 - **Uptime Kuma** — monitors both VMs, Proxmox, Portainer, Samba, and SSH
-<img src="screenshots/uptime-kuma-status.png" width="700" alt="Uptime Kuma dashboard monitoring all services">
+  <img src="screenshots/uptime-kuma-status.png" width="700" alt="Uptime Kuma dashboard monitoring all services">
 - **Homepage** — central dashboard linking every service
-<img src="screenshots/homepage-dashboard.png" width="700" alt="Homepage dashboard showing all services">
+  <img src="screenshots/homepage-dashboard.png" width="700" alt="Homepage dashboard showing all services">
 - **Jellyfin** — media server, reads from NFS-mounted `/mnt/nas/media`
 - **Tailscale** — private remote access to the whole lab without exposing
   anything publicly
