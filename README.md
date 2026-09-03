@@ -15,6 +15,7 @@ container orchestration, remote access, monitoring, and backups.
 
 ## Architecture
 
+![Architecture diagram](architecture.png)
 ```
                         ┌─────────────────────────────┐
                         │      Proxmox VE (Host)      │
