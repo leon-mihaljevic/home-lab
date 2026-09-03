@@ -1,0 +1,15 @@
+# Secrets / environment
+.env
+*.env
+*_secret*
+*.key
+*.pem
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+*.log
